@@ -1,104 +1,86 @@
-Credit Score Movement Classification
-Objective
-The goal of this project is to classify customers based on the movement of their credit scores — whether it is likely to increase, decrease, or remain stable — using a synthetic dataset. These insights help businesses take proactive financial decisions to minimize credit risk and identify growth opportunities.
+# Credit Score Movement Classification
 
-Target Definition
-The target variable target_credit_score_movement is created based on financial behavior rules:
+## Objective
+The objective of this project is to classify customers according to the movement of their credit scores — whether it will most probably **increase**, **decrease**, or stay **stable** — utilizing a synthetic dataset. These findings assist companies in taking proactive financial actions to reduce credit risk and detect business opportunity for growth.
 
-Decrease (High Risk)
+---
 
-Days Past Due (DPD) in the last 3 months greater than 60
+## Target Definition
+The target variable `target_credit_score_movement` is derived on the basis of financial behavior rules:
 
-Credit Utilization Ratio greater than 0.8
+### Decrease (High Risk)
+- Days Past Due (DPD) in the previous 3 months more than 60
+- Credit Utilization Ratio more than 0.8
+- Hard inquiries more than 2 in the past 6 months
 
-More than 2 hard inquiries in the last 6 months
+### Increase (High Opportunity)
+- EMI to Income ratio less than 0.3
+- Repayment History Score 70 or higher
 
-Increase (High Opportunity)
+### Stable
+- All other instances
 
-EMI to Income ratio less than 0.3
+---
 
-Repayment History Score greater than or equal to 70
+## Data and Preprocessing
+- A synthetic dataset of approximately **25,000 customer records** was employed
 
-Stable
+### Preprocessing steps involved:
+- Encoding categorical variables like gender and location
+- Feature scaling with `StandardScaler`
+- Class imbalance handling with **SMOTE** to obtain approximately equal class distribution
 
-All other cases
+---
 
-Data and Preprocessing
-A synthetic dataset with around 25,000 customer records was used
+## Overview of Model
+- **Model employed:** Random Forest Classifier
+- **Multiclass classification** with labels: `increase`, `decrease`, `stable`
 
-Preprocessing steps included:
+### Metrics used for evaluation:
+- **Accuracy:** 97 percent
 
-Encoding categorical features such as gender and location
+**F1-Score by class:**
+- Increase: 0.92
+- Decrease: 1.00
+- Stable: 0.98
 
-Feature scaling using StandardScaler
+---
 
-Handling class imbalance using SMOTE to achieve a roughly equal class distribution
+## SHAP Explainability
+**SHAP (SHapley Additive exPlanations)** was used to understand how different features affect the model’s predictions.
 
-Model Overview
-Model used: Random Forest Classifier
+### Important features for predicting an increase in credit score:
+- High repayment history
+- Low EMI burden
+- Low credit utilization
 
-Multiclass classification with labels: increase, decrease, stable
+### Important features for predicting a decrease in credit score:
+- High DPD
+- High utilization ratio
+- Frequent hard inquiries
 
-Evaluation metrics:
+### Visualizations included:
+- SHAP summary plots for global understanding
+- SHAP waterfall plots for single prediction explanation
 
-Accuracy: 97 percent
+---
 
-F1-Score by class:
+## Business Takeaways
 
-Increase: 0.92
+### High-Risk Segment (Predicted to Decrease)
+These customers will likely default or experience financial stress.
 
-Decrease: 1.00
+**Recommended interventions:**
+- Trigger credit risk notifications
+- Provide EMI restructuring opportunities
+- Send repayment reminders
+- Send credit behavior education material
 
-Stable: 0.98
+### High-Opportunity Segment (Predicted to Increase)
+These customers reflect good financial behavior and will be likely to remain loyal.
 
-SHAP Explainability
-SHAP (SHapley Additive exPlanations) was used to understand how different features affect the model’s predictions.
-
-Important features for predicting an increase in credit score:
-
-High repayment history
-
-Low EMI burden
-
-Low credit utilization
-
-Important features for predicting a decrease in credit score:
-
-High DPD
-
-High utilization ratio
-
-Frequent hard inquiries
-
-Visualizations included:
-
-Summary plots for global insights
-
-Waterfall plots for individual prediction explanation
-
-Business Takeaways
-High-Risk Segment (Predicted to Decrease)
-These customers are more likely to default or face financial distress.
-
-Suggested interventions:
-
-Send credit risk alerts
-
-Offer EMI restructuring options
-
-Provide repayment reminders
-
-Deliver credit behavior education content
-
-High-Opportunity Segment (Predicted to Increase)
-These customers show strong financial habits and are likely to stay loyal.
-
-Suggested interventions:
-
-Offer better credit terms or lower interest rates
-
-Provide pre-approved loans or credit cards
-
-Launch loyalty reward programs
-
-Promote financial growth products such as insurance or investment plans
+**Recommended interventions:**
+- Provide improved credit terms or reduced interest charges
+- Provide pre-approved credit or loans
+- Roll out loyalty reward schemes
+- Market financial growth solutions like insurance or investment products
